@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loyalty Partner Rule Tester</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Loyalty Partner Rule Tester</h1>
+      <p class="tagline">
+        Test how region, partner rules, and exceptions affect loyalty eligibility.
+      </p>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- LEFT: INPUT PANEL -->
+    <section class="panel panel-input">
+      <div class="panel-header">
+        <h2>Inputs</h2>
+        <div class="panel-actions">
+          <button id="load-example" class="btn btn-secondary">Load Example Scenario</button>
+        </div>
+      </div>
+
+      <p class="help-text">
+        Choose a region, partner, and tier. Toggle context flags, then click
+        <strong>Run Rule Test</strong> to see which rule actually fires.
+      </p>
+
+      <div class="field">
+        <label for="region">Region</label>
+        <select id="region" class="select">
+          <option value="US" selected>United States (USD)</option>
+          <option value="EU">Europe (EUR)</option>
+          <option value="UK">United Kingdom (GBP)</option>
+          <option value="JP">Japan (JPY)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="partner">Partner</label>
+        <select id="partner" class="select">
+          <option value="AERO" selected>AeroAir Flights</option>
+          <option value="MART">MetroMart Retail</option>
+          <option value="GSTAY">GlobalStay Hotels</option>
+          <option value="STREAM">StreamFlix Media</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="tier">Member Tier</label>
+        <select id="tier" class="select">
+          <option value="Member">Member</option>
+          <option value="Silver">Silver</option>
+          <option value="Gold" selected>Gold</option>
+          <option value="Platinum">Platinum</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="channel">Channel</label>
+        <select id="channel" class="select">
+          <option value="Online" selected>Online</option>
+          <option value="In-store">In-store</option>
+          <option value="In-app">In-app</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Context Flags</label>
+        <div class="flag-list">
+          <label class="flag-item">
+            <input id="flag-promo" type="checkbox" />
+            <span>Promotional window active</span>
+          </label>
+          <label class="flag-item">
+            <input id="flag-cobranded" type="checkbox" />
+            <span>Co-branded card used</span>
+          </label>
+          <label class="flag-item">
+            <input id="flag-corporate" type="checkbox" />
+            <span>Corporate account booking</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <button id="runBtn" class="btn btn-primary">Run Rule Test</button>
+        <span id="calc-status" class="parse-status" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <!-- RIGHT: RULE EVALUATION PANEL -->
+    <section class="panel panel-results">
+      <div class="panel-header">
+        <h2>Rule Evaluation</h2>
+      </div>
+
+      <div id="summary" class="summary">
+        <div id="summary-badge" class="summary-badge summary-badge-idle">
+          No evaluation yet.
+        </div>
+        <p id="summary-text" class="summary-text">
+          Enter a scenario on the left to see whether this partner is eligible — and why.
+        </p>
+      </div>
+
+      <div class="points-grid">
+        <div class="points-card">
+          <h3>Base Program Eligibility</h3>
+          <p id="base-line" class="points-line muted">
+            Global program rules for the selected region and tier will appear here.
+          </p>
+        </div>
+
+        <div class="points-card">
+          <h3>Partner Overrides</h3>
+          <p id="partner-line" class="points-line muted">
+            Partner-specific behavior, such as allow/deny and special cases, will appear here.
+          </p>
+        </div>
+
+        <div class="points-card">
+          <h3>Exceptions &amp; Blocks</h3>
+          <p id="exception-line" class="points-line muted">
+            Region blocks, tier restrictions, or corporate exceptions will appear here.
+          </p>
+        </div>
+      </div>
+
+      <div class="flow-diagram">
+        <h3>Rule Path</h3>
+        <pre id="rule-path">No evaluation yet.</pre>
+      </div>
+
+      <div class="raw-output">
+        <h3>Evaluation Details</h3>
+        <pre id="raw-output">No evaluation yet.</pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>
+      Part of the
+      <a href="https://github.com/rtfenter/loyalty-series" target="_blank" rel="noreferrer">
+        Loyalty Systems Series
+      </a>.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
