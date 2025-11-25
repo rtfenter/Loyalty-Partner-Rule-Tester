@@ -36,7 +36,8 @@ The prototype includes:
 
 ## Demo Screenshot
 
-> (Screenshot to be added after MVP implementation.)
+
+<img width="2804" height="1860" alt="Screenshot 2025-11-25 at 09-27-18 Loyalty Partner Rule Tester" src="https://github.com/user-attachments/assets/921b2003-8954-4cdf-a9e0-6aaf2daea937" />
 
 ---
 
@@ -122,7 +123,7 @@ https://github.com/rtfenter/loyalty-series
 
 ## Status  
 
-MVP design defined.  
+MVP is implemented and active.  
 Frontend implementation in progress — this prototype will remain intentionally lightweight and focused on making partner rules testable and explainable, not on modeling every edge case in production.
 
 ---
