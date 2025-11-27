@@ -25,7 +25,7 @@ The prototype includes:
 - A small, embedded rule set that defines:
   - Where a partner is eligible  
   - Which regions or tiers are blocked  
-  - When overrides apply (e.g., partner wins over default rule)  
+  - When overrides apply  
 - A rule evaluation summary showing:
   - Whether the transaction is eligible for earn  
   - Which rule fired (base, override, or exception)  
@@ -36,36 +36,36 @@ The prototype includes:
 
 ## Demo Screenshot
 
-
 <img width="2804" height="1860" alt="Screenshot 2025-11-25 at 09-27-18 Loyalty Partner Rule Tester" src="https://github.com/user-attachments/assets/921b2003-8954-4cdf-a9e0-6aaf2daea937" />
 
 ---
 
 ## Partner Rule Evaluation Flow
 
-    [Region + Partner + Tier + Context]
-                      |
-                      v
-            Base Program Eligibility
-           (global rules for earn/redeem)
-                      |
-                      v
-            Partner Rule Resolution
-      (partner-specific allow/deny/limits)
-                      |
-                      v
-            Override & Exception Layer
-      (e.g., region blocks, tier blocks,
-          special promotional window)
-                      |
-                      v
-         Final Eligibility & Outcome
-      (eligible / blocked / modified earn)
-                      |
-                      v
-           Human-Readable Explanation
-      ("Eligible via partner override in EU",
-       "Blocked: partner not available in JP")
+```
+[Region + Partner + Tier + Context]
+                  |
+                  v
+        Base Program Eligibility
+       (global rules for earn/redeem)
+                  |
+                  v
+        Partner Rule Resolution
+  (partner-specific allow/deny/limits)
+                  |
+                  v
+        Override & Exception Layer
+  (region blocks, tier blocks, promos)
+                  |
+                  v
+     Final Eligibility & Outcome
+  (eligible / blocked / modified earn)
+                  |
+                  v
+       Human-Readable Explanation
+("Eligible via partner override in EU",
+ "Blocked: partner not available in JP")
+```
 
 ---
 
@@ -76,7 +76,7 @@ In production systems, partner behavior is where loyalty logic usually starts to
 - Contracts define one set of rules  
 - Implementation adds shortcuts or special cases  
 - Regions negotiate exceptions  
-- Campaigns stack on top of existing conditions  
+- Campaigns stack on top  
 
 Over time, it becomes hard to answer a basic question:  
 
@@ -88,52 +88,48 @@ This tool provides a small, understandable way to:
 - Run scenarios against it  
 - See which rule actually fired  
 
-—
+---
 
 ## How This Maps to Real Loyalty Systems
 
-Even though it's minimal, each part corresponds to real architecture:
-
 ### Base Program Eligibility  
-In real systems, global rules define who can earn or redeem at all: program membership, status, regulatory constraints, and sometimes KYC or AML checks.
+Global eligibility rules: membership, regulatory constraints, KYC/AML, or program-level restrictions.
 
 ### Partner Rule Resolution  
-Partners typically fund different earn rates, categories, or channels. They may restrict earning to certain regions, tiers, or payment methods. In production, these rules live across code, configs, and contracts.
+Where partner-specific rules live: earn rates, categories, funding rules, and region/tier restrictions.
 
 ### Override & Exception Layer  
-This is where complexity accumulates: regional exceptions, legacy agreements, special migration deals, or “temporary” rules that never get removed. This layer is often opaque to everyone except the team maintaining it.
+Regional exceptions, migration contracts, promotional windows — the layer that grows chaotic over time.
 
-### Final Eligibility & Outcome  
-The system must decide: eligible or not, and at what earn rate or condition. That outcome is what gets written to the ledger — and what members eventually see (or don’t see) in their account.
+### Final Eligibility  
+The system must output a clear truth: allowed or denied, with the correct conditions applied.
 
 ### Explanation Layer  
-The UI and operations teams need a way to explain decisions: “Why did this member not earn here?” or “Why is this partner available in one market and not another?”  
-This prototype focuses on that explainability: smaller rule set, clear evaluation, human-readable summary.
+Critical for support, operations, and member-facing transparency.
 
-This tool is a legible micro-version of how partner rule engines behave under the hood.
+This prototype builds a legible slice of that entire rule engine.
 
 ---
 
 ## Part of the Loyalty Systems Series
 
 Main repo:  
-https://github.com/rtfenter/loyalty-series
+https://github.com/rtfenter/Loyalty-Systems-Series
 
 ---
 
 ## Status  
 
 MVP is implemented and active.  
-Frontend implementation in progress — this prototype will remain intentionally lightweight and focused on making partner rules testable and explainable, not on modeling every edge case in production.
+This tool will remain intentionally lightweight — focused on clarity and rule explainability.
 
 ---
 
 ## Local Use
 
-No installation required.  
-Once implemented, to run the tester locally:
+Everything runs client-side.
 
 1. Clone the repo  
 2. Open `index.html` in your browser  
 
-Everything will run client-side.
+That’s it — no backend required.
